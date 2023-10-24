@@ -10,22 +10,18 @@ import java.util.List;
 public class EjemploGenericos {
     public static void main(String[] args) {
 
-        /**/
-
+        /*MANERA COMUN DE DECLARAR UNA LISTA DE UN TIPO DE DATO*/
         List<Cliente> clientes = new ArrayList<>();
         clientes.add(new Cliente("Fernando", "Pereyra"));
-
-        Cliente andres = clientes.iterator().next();
-
 
         Cliente[] clientesArreglo = {new Cliente("Luci", "Martínez"),
                 new Cliente("Andres", "Lázaro")};
         Integer[] enterosArreglo = {1, 2, 3};
 
         /*SE CREA UN LIST<CLIENTE> DE CLIENTES A PARTIR DE UN ARRAY */
-        List<Cliente> clientesLista = fromArrayToList(clientesArreglo);
+        List<Cliente> clientesLista = pasarArrayAlista(clientesArreglo);
         /*SE CREA UN LIST<INTEGER> DE MUMEROS A PARTIR DE UN ARRAY */
-        List<Integer> enterosLista = fromArrayToList(enterosArreglo);
+        List<Integer> enterosLista = pasarArrayAlista(enterosArreglo);
 
         /*SE RECORREN LAS DOS LISTAS*/
         clientesLista.forEach(s -> System.out.print(s + " "));
@@ -38,7 +34,7 @@ public class EjemploGenericos {
 
         /*SE CREA UN LIST<STRING> DE NOMBRES A PARTIR DE UN ARRAY E IMPRIME,
          TANTO EL LIST CREADO, COMO  EL SEGUNDO PARAMETRO (enterosArreglo) */
-        List<String> nombres = fromArrayToList(new String[]{"Andrés", "Pepe",
+        List<String> nombres = pasarArrayAlista(new String[]{"Andrés", "Pepe",
                 "Luci", "Bea", "Jair"}, enterosArreglo);
         System.out.println("\n--------------------------------------------");
 
@@ -47,7 +43,7 @@ public class EjemploGenericos {
 
 
         /*SE CREA UN LIST<CLIENTEPREMIUM> DE CLIENTES PREMIUM A PARTIR DE UN ARRAY */
-        List<ClientePremium> clientesPremiumList = fromArrayToList(
+        List<ClientePremium> clientesPremiumList = pasarArrayAlista(
                 new ClientePremium[]{new ClientePremium("Paco", "Fernández")});
 
         System.out.println("\n--------------------------------------------");
@@ -72,24 +68,24 @@ public class EjemploGenericos {
     }
 
     /*METODO QUE TRANSFORMA CUALQUIER TIPO DE ARRAY A UN TIPO LISTA*/
-    public static <T> List<T> fromArrayToList(T[] c) {
+    public static <T> List<T> pasarArrayAlista(T[] c) {
         return Arrays.asList(c);
     }
 
     /*METODO QUE TRANSFORMA CUALQUIER TIPO DE ARRAY QUE EXTIENDA DE NUMBER, A UN TIPO LISTA*/
-    public static <T extends Number> List<T> fromArrayToList(T[] c) {
+    public static <T extends Number> List<T> pasarArrayAlista(T[] c) {
         return Arrays.asList(c);
     }
 
     /*METODO QUE TRANSFORMA CUALQUIER TIPO DE ARRAY QUE EXTIENDA DE CLIENTE E IMPLEMENTE
      LA INTERFAZ COMPARABLE, A UN TIPO LISTA*/
-    public static <T extends Cliente & Comparable<T>> List<T> fromArrayToList(T[] c) {
+    public static <T extends Cliente & Comparable<T>> List<T> pasarArrayAlista(T[] c) {
         return Arrays.asList(c);
     }
 
     /*METODO DE TIPO DE DOS GENERICOS <T,G> QUE RECORRE UN ARRAY DE TIPO G Y LO IMPRIME,
      * MIENTRAS QUE TRANSFORMA EL DE TIPO T A UN TIPO LIST*/
-    public static <T, G> List<T> fromArrayToList(T[] t, G[] g) {
+    public static <T, G> List<T> pasarArrayAlista(T[] t, G[] g) {
         for (G elemento : g) {
             System.out.print(elemento + " ");
         }
@@ -102,7 +98,7 @@ public class EjemploGenericos {
     }
 
     /*METODO QUE COMPARA UN TIPO DE DATO SIEMPRE Y CUANDO, IMPLEMENTE COMPARABLE<T>, RETORNA UN TIPO GENERICO T
-    * Y TAMBIEN RECIBE 3 PARAMETROS GENERICOS T. RETORNA EL VALOR MAS ALTO O GRANDE*/
+     * Y TAMBIEN RECIBE 3 PARAMETROS GENERICOS T. RETORNA EL VALOR MAS ALTO O GRANDE*/
     public static <T extends Comparable<T>> T maximo(T a, T b, T c) {
         T max = a;
         if (b.compareTo(max) > 0) {
